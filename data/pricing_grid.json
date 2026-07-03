@@ -1,0 +1,76 @@
+{
+  "services": {
+    "diagnostic": {
+      "nom": "Diagnostic complet",
+      "prix": 50,
+      "duree_minutes": 60,
+      "description": "Analyse complète du problème (matériel/logiciel).",
+      "type_demande": "problème"
+    },
+    "nettoyage_logiciel": {
+      "nom": "Nettoyage logiciel",
+      "prix": 80,
+      "duree_minutes": 90,
+      "description": "Suppression de malware, fichiers temporaires, optimisation.",
+      "type_demande": "problème"
+    },
+    "reparation_materielle": {
+      "nom": "Réparation matérielle",
+      "prix": 120,
+      "duree_minutes_min": 120,
+      "duree_minutes_max": 240,
+      "description": "Remplacement de composants (RAM, disque dur, etc.).",
+      "type_demande": "problème"
+    },
+    "sauvegarde_automatique": {
+      "nom": "Sauvegarde automatique",
+      "prix": 200,
+      "duree_minutes": 180,
+      "description": "Mise en place d'une solution de sauvegarde cloud/locale.",
+      "type_demande": "service"
+    },
+    "installation_logiciel": {
+      "nom": "Installation de logiciel",
+      "prix": 60,
+      "duree_minutes": 60,
+      "description": "Installation et configuration d'un logiciel spécifique.",
+      "type_demande": "service"
+    },
+    "formation_utilisateur": {
+      "nom": "Formation utilisateur",
+      "prix": 100,
+      "duree_minutes": 120,
+      "description": "Formation sur un outil ou un processus.",
+      "type_demande": "service"
+    },
+    "maintenance_preventive": {
+      "nom": "Maintenance préventive",
+      "prix": 150,
+      "duree_minutes": 120,
+      "description": "Vérification complète du système pour éviter les pannes.",
+      "type_demande": "service"
+    },
+    "depannage_urgent": {
+      "nom": "Dépannage urgent",
+      "prix": 250,
+      "duree_minutes": 90,
+      "description": "Intervention prioritaire pour problème bloquant.",
+      "type_demande": "problème",
+      "urgence_minimale": "haute"
+    }
+  },
+  "options": {
+    "deplacement": {
+      "nom": "Déplacement sur site",
+      "prix": 40,
+      "duree_minutes": 30,
+      "description": "Frais de déplacement (si intervention sur place)."
+    },
+    "teleassistance": {
+      "nom": "Tél-assistance",
+      "prix": 0,
+      "duree_minutes": 0,
+      "description": "Prise en main à distance (gratuit)."
+    }
+  }
+}
