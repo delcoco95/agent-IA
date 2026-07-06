@@ -1,2 +1,10 @@
+# Dépendances pour l'agent IA BeneIT
+# API Web (Flask)
+flask>=3.0.0
+flask-cors>=4.0.0
+
+# Client OpenRouter (pour l'IA)
 openai>=1.0.0
+
+# Gestion des variables d'environnement
 python-dotenv>=1.0.0
