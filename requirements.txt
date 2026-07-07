@@ -8,3 +8,7 @@ openai>=1.0.0
 
 # Gestion des variables d'environnement
 python-dotenv>=1.0.0
+
+# Pour le script agent_local.py
+psutil>=5.9.0
+requests>=2.31.0
