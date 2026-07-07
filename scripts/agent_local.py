@@ -155,9 +155,9 @@ def get_top_processes(count: int = 10) -> List[Dict[str, Any]]:
                 processes.append({
                     "pid": info['pid'],
                     "name": info['name'],
-                    "username": info.get('username', 'N/A'),
-                    "cpu_percent": round(info.get('cpu_percent', 0), 1),
-                    "memory_percent": round(info.get('memory_percent', 0), 1),
+                    "username": info.get('username') or 'N/A',
+                    "cpu_percent": info.get('cpu_percent') or 0,
+                    "memory_percent": info.get('memory_percent') or 0,
                     "create_time": create_time
                 })
             except (psutil.NoSuchProcess, psutil.AccessDenied) as e:
@@ -227,6 +227,8 @@ def get_windows_updates() -> List[Dict[str, Any]]:
             ["powershell", "-Command", ps_command],
             capture_output=True,
             text=True,
+            encoding='utf-8',
+            errors='replace',
             timeout=30
         )
         
@@ -238,9 +240,9 @@ def get_windows_updates() -> List[Dict[str, Any]]:
                 if isinstance(parsed, list):
                     for update in parsed:
                         updates.append({
-                            "title": update.get("Title", "N/A"),
-                            "kb_articles": update.get("KBArticleIDs", []),
-                            "size_mb": round(update.get("SizeInBytes", 0) / (1024**2), 2)
+                            "title": update.get("Title") or "N/A",
+                            "kb_articles": update.get("KBArticleIDs") or [],
+                            "size_mb": round(update.get("SizeInBytes") or 0 / (1024**2), 2)
                         })
                 elif isinstance(parsed, dict):
                     updates.append(parsed)
@@ -288,6 +290,8 @@ def get_windows_event_errors() -> List[Dict[str, Any]]:
             ["powershell", "-Command", ps_command],
             capture_output=True,
             text=True,
+            encoding='utf-8',
+            errors='replace',
             timeout=30
         )
         
@@ -298,11 +302,11 @@ def get_windows_event_errors() -> List[Dict[str, Any]]:
                 if isinstance(parsed, list):
                     for event in parsed:
                         errors.append({
-                            "time": event.get("TimeCreated", "N/A"),
-                            "id": event.get("Id", "N/A"),
-                            "level": event.get("LevelDisplayName", "N/A"),
-                            "source": event.get("Source", "N/A"),
-                            "message": event.get("Message", "N/A")[:200] + "..." if len(event.get("Message", "")) > 200 else event.get("Message", "N/A")
+                            "time": event.get("TimeCreated") or "N/A",
+                            "id": event.get("Id") or "N/A",
+                            "level": event.get("LevelDisplayName") or "N/A",
+                            "source": event.get("Source") or "N/A",
+                            "message": (event.get("Message") or "N/A")[:200] + "..." if len(event.get("Message") or "") > 200 else event.get("Message") or "N/A"
                         })
             except json.JSONDecodeError:
                 errors.append({"raw_output": result.stdout.strip()})
@@ -426,8 +430,8 @@ def print_top_processes(processes: List[Dict[str, Any]]):
             print(f"  ⚠ {p['error']}")
             continue
         
-        print(f"  {p['pid']:<8} {p['name']:<25} {p.get('username', 'N/A'):<15} "
-              f"{p['cpu_percent']:<8.1f} {p['memory_percent']:<8.1f} {p['create_time']}")
+        print(f"  {p['pid']:<8} {p['name']:<25} {(p.get('username') or 'N/A'):<15} "
+              f"{float(p.get('cpu_percent') or 0):<8.1f} {float(p.get('memory_percent') or 0):<8.1f} {p['create_time']}")
 
 
 def print_windows_updates(updates: List[Dict[str, Any]]):
@@ -446,10 +450,10 @@ def print_windows_updates(updates: List[Dict[str, Any]]):
         elif "raw_output" in update:
             print(f"  {update['raw_output']}")
         else:
-            print(f"\n  Titre: {update.get('title', 'N/A')}")
+            print(f"\n  Titre: {update.get('title') or 'N/A'}")
             if update.get('kb_articles'):
                 print(f"  Articles KB: {', '.join(update['kb_articles'])}")
-            print(f"  Taille: {update.get('size_mb', 0)} Mo")
+            print(f"  Taille: {update.get('size_mb') or 0} Mo")
 
 
 def print_windows_errors(errors: List[Dict[str, Any]]):
@@ -466,9 +470,9 @@ def print_windows_errors(errors: List[Dict[str, Any]]):
         elif "raw_output" in error:
             print(f"  {error['raw_output']}")
         else:
-            print(f"\n  [{error.get('time', 'N/A')}] {error.get('level', 'N/A')}")
-            print(f"  Source: {error.get('source', 'N/A')} (ID: {error.get('id', 'N/A')})")
-            print(f"  Message: {error.get('message', 'N/A')}")
+            print(f"\n  [{error.get('time') or 'N/A'}] {error.get('level') or 'N/A'}")
+            print(f"  Source: {error.get('source') or 'N/A'} (ID: {error.get('id') or 'N/A'})")
+            print(f"  Message: {error.get('message') or 'N/A'}")
 
 
 def print_network_info(network_info: Dict[str, Any]):
