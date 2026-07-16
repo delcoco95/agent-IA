@@ -1,52 +1,36 @@
 """
 Schéma des données pour l'agent IA BeneIT.
-Définit les structures de données principales : FicheClient et Devis.
 """
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Dict, Any, Optional
+from pydantic import BaseModel, Field
 
 
-@dataclass
-class FicheClient:
-    """
-    Représente une fiche client qualifiée.
-    
-    Attributs :
-        nom (str) : Nom complet du client.
-        email (str) : Adresse email du client.
-        telephone (str) : Numéro de téléphone du client.
-        disponibilite (str) : Disponibilités du client (ex: "lundi 14h-16h").
-        type_demande (str) : Type de demande, soit "problème" soit "service".
-        appareil (str) : Type d'appareil concerné (ex: "PC Windows", "MacBook Pro").
-        symptomes (List[str]) : Liste des symptômes ou besoins (ex: ["lenteur", "plantages"]).
-        urgence (str) : Niveau d'urgence, doit être dans ["basse", "moyenne", "haute"].
-        description_libre (str) : Message initial brut du client.
-        details (Dict[str, str]) : Autres informations techniques (ex: {"os": "Windows 11"}).
-    """
+class FicheClient(BaseModel):
+    """Représente une fiche client extraite de la conversation."""
+    nom: Optional[str] = Field(default=None, description="Nom du client")
+    email: Optional[str] = Field(default=None, description="Email du client")
+    telephone: Optional[str] = Field(default=None, description="Téléphone du client")
+    disponibilite: Optional[str] = Field(default=None, description="Disponibilité du client")
+    type_demande: Optional[str] = Field(default=None, description="Type de demande (ex: dépannage, installation)")
+    appareil: Optional[str] = Field(default=None, description="Appareil concerné (ex: PC Windows 11, MacBook Pro)")
+    symptomes: Optional[str] = Field(default=None, description="Symptômes décrits par le client")
+    urgence: Optional[str] = Field(default=None, description="Niveau d'urgence (basse, moyenne, haute)")
+    description_libre: Optional[str] = Field(default="", description="Description libre du problème")
+    details: Dict[str, Any] = Field(default_factory=dict, description="Champs spécifiques au domaine")
+    domaine: str = Field(default="diagnostic", description="Domaine de la demande (virus, optimisation, etc.)")
+
+
+class Service(BaseModel):
+    """Représente un service dans un devis."""
     nom: str
-    email: str
-    telephone: str
-    disponibilite: str
-    type_demande: str  # "problème" ou "service"
-    appareil: str
-    symptomes: List[str]
-    urgence: str  # "basse", "moyenne", "haute"
-    description_libre: str
-    details: Dict[str, str] = field(default_factory=dict)
+    description: str
+    prix: float
+    quantite: int = 1
 
 
-@dataclass
-class Devis:
-    """
-    Représente un devis généré pour un client.
-    
-    Attributs :
-        client (FicheClient) : Fiche client associée au devis.
-        services (List[Dict]) : Liste des services inclus dans le devis.
-        options (List[Dict]) : Liste des options suggérées (non incluses par défaut).
-        total (float) : Montant total du devis (en euros).
-    """
+class Devis(BaseModel):
+    """Représente un devis généré pour un client."""
     client: FicheClient
-    services: List[Dict]
-    options: List[Dict]
+    services: list[Service]
+    options: list[Service] = Field(default_factory=list)
     total: float

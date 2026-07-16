@@ -1,76 +1,125 @@
 {
-  "services": {
+  "domaines": {
+    "virus": {
+      "services": [
+        {
+          "nom": "Diagnostic virus/malware",
+          "description": "Analyse complète du système pour détecter les infections.",
+          "prix": 49.99
+        },
+        {
+          "nom": "Suppression de malware",
+          "description": "Nettoyage et suppression des logiciels malveillants.",
+          "prix": 89.99
+        }
+      ],
+      "options": [
+        {
+          "nom": "Récupération de fichiers chiffrés",
+          "description": "Tentative de récupération des fichiers impactés par un ransomware.",
+          "prix": 120.00
+        }
+      ]
+    },
+    "optimisation": {
+      "services": [
+        {
+          "nom": "Diagnostic de performance",
+          "description": "Analyse des ressources (CPU, RAM, disque) pour identifier les goulots d'étranglement.",
+          "prix": 39.99
+        },
+        {
+          "nom": "Nettoyage et optimisation",
+          "description": "Nettoyage des fichiers temporaires, désinstallation des logiciels inutiles, optimisation du démarrage.",
+          "prix": 69.99
+        }
+      ],
+      "options": [
+        {
+          "nom": "Mise à niveau RAM",
+          "description": "Ajout de barrettes RAM (prix variable selon la quantité).",
+          "prix": 99.99
+        }
+      ]
+    },
+    "sauvegarde": {
+      "services": [
+        {
+          "nom": "Configuration sauvegarde locale",
+          "description": "Mise en place d'une solution de sauvegarde sur disque dur externe.",
+          "prix": 59.99
+        },
+        {
+          "nom": "Configuration sauvegarde cloud",
+          "description": "Configuration d'une solution de sauvegarde vers un service cloud (Google Drive, OneDrive, etc.).",
+          "prix": 79.99
+        }
+      ],
+      "options": [
+        {
+          "nom": "Sauvegarde initiale complète",
+          "description": "Copie complète des données existantes vers la solution de sauvegarde.",
+          "prix": 49.99
+        }
+      ]
+    },
+    "microsoft365": {
+      "services": [
+        {
+          "nom": "Diagnostic Microsoft 365",
+          "description": "Analyse des problèmes liés à Outlook, Teams ou OneDrive.",
+          "prix": 39.99
+        },
+        {
+          "nom": "Configuration compte Microsoft 365",
+          "description": "Aide à la configuration d'un compte professionnel ou personnel.",
+          "prix": 59.99
+        }
+      ],
+      "options": [
+        {
+          "nom": "Migration de données",
+          "description": "Migration des emails ou fichiers vers un nouveau compte.",
+          "prix": 89.99
+        }
+      ]
+    },
+    "reseau": {
+      "services": [
+        {
+          "nom": "Diagnostic réseau",
+          "description": "Analyse de la connexion internet et du matériel réseau.",
+          "prix": 39.99
+        },
+        {
+          "nom": "Configuration Wi-Fi",
+          "description": "Optimisation des paramètres Wi-Fi pour une meilleure couverture et stabilité.",
+          "prix": 59.99
+        }
+      ],
+      "options": [
+        {
+          "nom": "Installation matériel réseau",
+          "description": "Installation et configuration d'un nouveau routeur ou répéteur Wi-Fi.",
+          "prix": 79.99
+        }
+      ]
+    },
     "diagnostic": {
-      "nom": "Diagnostic complet",
-      "prix": 50,
-      "duree_minutes": 60,
-      "description": "Analyse complète du problème (matériel/logiciel).",
-      "type_demande": "problème"
-    },
-    "nettoyage_logiciel": {
-      "nom": "Nettoyage logiciel",
-      "prix": 80,
-      "duree_minutes": 90,
-      "description": "Suppression de malware, fichiers temporaires, optimisation.",
-      "type_demande": "problème"
-    },
-    "reparation_materielle": {
-      "nom": "Réparation matérielle",
-      "prix": 120,
-      "duree_minutes_min": 120,
-      "duree_minutes_max": 240,
-      "description": "Remplacement de composants (RAM, disque dur, etc.).",
-      "type_demande": "problème"
-    },
-    "sauvegarde_automatique": {
-      "nom": "Sauvegarde automatique",
-      "prix": 200,
-      "duree_minutes": 180,
-      "description": "Mise en place d'une solution de sauvegarde cloud/locale.",
-      "type_demande": "service"
-    },
-    "installation_logiciel": {
-      "nom": "Installation de logiciel",
-      "prix": 60,
-      "duree_minutes": 60,
-      "description": "Installation et configuration d'un logiciel spécifique.",
-      "type_demande": "service"
-    },
-    "formation_utilisateur": {
-      "nom": "Formation utilisateur",
-      "prix": 100,
-      "duree_minutes": 120,
-      "description": "Formation sur un outil ou un processus.",
-      "type_demande": "service"
-    },
-    "maintenance_preventive": {
-      "nom": "Maintenance préventive",
-      "prix": 150,
-      "duree_minutes": 120,
-      "description": "Vérification complète du système pour éviter les pannes.",
-      "type_demande": "service"
-    },
-    "depannage_urgent": {
-      "nom": "Dépannage urgent",
-      "prix": 250,
-      "duree_minutes": 90,
-      "description": "Intervention prioritaire pour problème bloquant.",
-      "type_demande": "problème",
-      "urgence_minimale": "haute"
-    }
-  },
-  "options": {
-    "deplacement": {
-      "nom": "Déplacement sur site",
-      "prix": 40,
-      "duree_minutes": 30,
-      "description": "Frais de déplacement (si intervention sur place)."
-    },
-    "teleassistance": {
-      "nom": "Tél-assistance",
-      "prix": 0,
-      "duree_minutes": 0,
-      "description": "Prise en main à distance (gratuit)."
+      "services": [
+        {
+          "nom": "Diagnostic général",
+          "description": "Analyse complète du système pour identifier la cause du problème.",
+          "prix": 49.99
+        }
+      ],
+      "options": [
+        {
+          "nom": "Dépannage standard",
+          "description": "Résolution du problème identifié (tarif horaire).",
+          "prix": 60.00
+        }
+      ]
     }
   }
 }
